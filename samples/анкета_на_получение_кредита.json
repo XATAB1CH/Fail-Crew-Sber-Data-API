@@ -1,0 +1,27 @@
+{
+  "personInfo": {
+    "firstName": "Иван",
+    "lastName": "Иванов",
+    "middleName": "Иванович",
+    "gender" : "M",
+    "birthDate" : "19.12.2005",
+    "citizenship" : "Россия",
+    "addresses" : {
+      "registrationAddress" : "Владимирская область, г. Владимир ул.Ленина 3",
+      "residentialAddress" : "Псковская область, г. Опочка ул.Некрасова 25 .д 3"
+    },
+    "documents" : {
+      "documentType" : "PASSPORT",
+      "documentSerie" : "4019",
+      "documentNumber" : "3456780"
+    },
+    "contactInfo" : {
+      "email" : "ivan.ivanov@gmail.com",
+      "phone" : "+7(495) 555-55-55"
+    },
+    "applicationInfo" : {
+      "applicationDate" : "2024-11-22T06:06:27.292Z",
+      "product" : "Образовательный кредит"
+    }
+  }
+}

@@ -1,0 +1,285 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Анкета на получение образовательного кредита",
+  "type": "object",
+  "required": [
+    "applicationInfo",
+    "personInfo"
+  ],
+  "properties": {
+    "applicationInfo": {
+      "description": "Информация о заявке",
+      "type": "object",
+      "required": [
+        "applicationID",
+        "applicationDate"
+      ],
+      "properties": {
+        "applicationID": {
+          "description": "ID заявки на получение образовательного кредита",
+          "type": "string"
+        },
+        "applicationDate": {
+          "description": "Дата заявки на получение образовательного кредита",
+          "type": "string"
+        },
+        "loanAmount": {
+          "description": "Сумма кредита",
+          "type": "number"
+        },
+        "loanTerm": {
+          "description": "Срок кредита",
+          "type": "integer"
+        }
+      }
+    },
+    "personInfo": {
+      "description": "Информация об учащемся",
+      "type": "object",
+      "required": [
+        "firstName",
+        "lastName",
+        "gender",
+        "birthDate",
+        "citizenship",
+        "addresses",
+        "document",
+        "educationInfo",
+        "contactInfo",
+        "parentsInfo"
+      ],
+      "properties": {
+        "firstName": {
+          "description": "Имя учащегося",
+          "type": "string"
+        },
+
+        "lastName": {
+          "description": "Фамилия учащегося",
+          "type": "string"
+        },
+        "middleName": {
+          "description": "Отчество учащегося",
+          "type": "string"
+        },
+        "gender": {
+          "description": "Пол",
+          "type": "string"
+        },
+        "birthDate": {
+          "description": "Дата рождения",
+          "type": "string"
+        },
+        "citizenship": {
+          "description": "Гражданство",
+          "type": "string"
+        },
+        "addresses": {
+          "description": "Информация об адресах",
+          "type": "object",
+          "required": [
+            "registrationAddress",
+            "residentialAddress"
+          ],
+          "properties": {
+            "registrationAddress": {
+              "description": "Адрес регистрации",
+              "type": "string"
+            },
+            "residentialAddress": {
+              "description": "Адрес проживания",
+              "type": "string"
+            }
+          }
+        },
+        "document": {
+          "description": "Основной документ учащегося",
+          "type": "object",
+          "required": [
+            "documentType",
+            "documentNumber",
+            "documentSerie"
+          ],
+          "properties": {
+            "documentType": {
+              "description": "Тип документа",
+              "type": "string"
+            },
+            "documentNumber": {
+              "description": "Номер документа",
+              "type": "string"
+            },
+            "documentSerie": {
+              "description": "Серия документа",
+              "type": "string"
+            }
+          }
+        },
+        "educationInfo": {
+          "description": "Данные об образовании участника сделки",
+          "type": "object",
+          "required": [
+            "educationStatus",
+            "universityName",
+            "universityAddress",
+            "educationSpecialty"
+          ],
+          "properties": {
+            "educationStatus": {
+              "description": "Код ступени образования 1 - высшее, 2 - среднее, 3 - неоконченное высшее и т.д.",
+              "type": "string"
+            },
+            "universityName": {
+              "description": "Название учебного заведения",
+              "type": "string"
+            },
+            "universityAddress": {
+              "description": "Адрес учебного заведения",
+              "type": "string"
+            },
+            "educationSpecialty": {
+              "description": "Специальность",
+              "type": "string"
+            },
+            "educationStartDate": {
+              "description": "Дата начала обучения",
+              "type": "string"
+            },
+            "educationEndDate": {
+              "description": "Дата окончания обучения",
+              "type": "string"
+            }
+          }
+        },
+        "contactInfo": {
+          "description": "Контактная информация",
+          "type": "object",
+          "required": [
+            "phone"
+          ],
+          "properties": {
+            "email": {
+              "description": "Электронная почта",
+              "type": "string"
+            },
+            "phone": {
+              "description": "Телефон",
+              "type": "string"
+            }
+          }
+        },
+        "parentsInfo": {
+          "description": "Информация о родителях",
+          "type": "object",
+          "required": [
+            "parentsCount",
+            "parents"
+          ],
+          "properties": {
+            "parentsCount": {
+              "description": "Количество родителей/опекунов",
+              "type": "number"
+            },
+            "parents": {
+              "description": "Информация о родителях/опекунах",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "firstName",
+                  "lastName",
+                  "gender",
+                  "birthDate",
+                  "citizenship",
+                  "addresses",
+                  "document"
+                ],
+                "properties": {
+                  "firstName": {
+                    "description": "Имя родителя/опекуна",
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "description": "Фамилия родителя/опекуна",
+                    "type": "string"
+                  },
+                  "middleName": {
+                    "description": "Отчество родителя/опекуна",
+                    "type": "string"
+                  },
+                  "gender": {
+                    "description": "Пол",
+                    "type": "string"
+                  },
+                  "birthDate": {
+                    "description": "Дата рождения",
+                    "type": "string"
+                  },
+                  "citizenship": {
+                    "description": "Гражданство",
+                    "type": "string"
+                  },
+                  "addresses": {
+                    "description": "Информация об адресах",
+                    "type": "object",
+                    "required": [
+                      "registrationAddress",
+                      "residentialAddress"
+                    ],
+                    "properties": {
+                      "registrationAddress": {
+                        "description": "Адрес регистрации",
+                        "type": "string"
+                      },
+                      "residentialAddress": {
+                        "description": "Адрес проживания",
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "document": {
+                    "description": "Основной документ родителя/опекуна",
+                    "type": "object",
+                    "required": [
+                      "documentType",
+                      "documentNumber",
+                      "documentSerie"
+                    ],
+                    "properties": {
+                      "documentType": {
+                        "description": "Тип документа",
+                        "type": "string"
+                      },
+                      "documentNumber": {
+                        "description": "Номер документа",
+                        "type": "string"
+                      },
+                      "documentSerie": {
+                        "description": "Серия документа",
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "contactInfo": {
+                    "description": "Контактная информация",
+                    "type": "object",
+                    "properties": {
+                      "email": {
+                        "description": "Электронная почта",
+                        "type": "string"
+                      },
+                      "phone": {
+                        "description": "Телефон",
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
