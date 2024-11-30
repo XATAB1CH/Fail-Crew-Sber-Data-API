@@ -21,7 +21,7 @@
             },
             "value": {
                 "description": "Некий путь до элемента информации или массива, массив аргументов функции (null - нет аргументов)",
-                "type": ["string", "number", "object", "boolean", "null"]
+                "type": ["string", "number", "object", "boolean", "null", "array"]
             }
         },
         "additionalProperties": false
