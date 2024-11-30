@@ -1,0 +1,6 @@
+Database = ""
+DebugMode = true
+Host = "127.0.0.1"
+Password = ""
+Port = 5432
+Username = "admin"
