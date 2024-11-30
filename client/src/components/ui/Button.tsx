@@ -22,8 +22,8 @@ export default function Button({title, onClick, img='none', type=ButtonType.SOLI
     type === ButtonType.SOLID ? 'fill-white' : 'fill-primary';
 
   return (
-    <button className={`rounded-lg bg-primary px-4 py-2 text-textColor flex gap-1 ${buttonStyles} `} onClick={onClick}>
-      <img src='/plus.svg' className={`${svgStyles} fill-current  `} alt="icon" />
+    <button className={`rounded-lg bg-primary px-4 py-2 flex gap-1 ${buttonStyles} `} onClick={onClick}>
+      {/* <img src='/plus.svg' className={`${svgStyles} fill-current  `} alt="icon" /> */}
         {title}
       </button>
   )

@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 type Option = {
     value: string;
     label: string;
+    type: string;
 };
 
 type DropdownProps = {
@@ -22,6 +23,7 @@ export default function Dropdown({options, label, onSelect}: DropdownProps) {
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchParam(e.target.value);
+        setSelectedOption(e.target.value);
         setIsOpen(true);
     };
 
