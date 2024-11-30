@@ -1,22 +1,13 @@
 import React from 'react';
+import Button from './components/ui/Button';
+import Source from './components/common/Source';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="max-w-[1200px] mx-auto mx-auto h-full w-full">
+      <Source />
     </div>
+    
   );
 }
 
