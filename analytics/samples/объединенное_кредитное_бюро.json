@@ -1,0 +1,55 @@
+{
+  "loaner": {
+    "firstName": "Иван",
+    "lastName": "Иванов",
+    "middleName": "Иванович",
+    "birthplace" : "Владимир",
+    "birthDate" : "19.12.2005",
+    "citizenship" : "Российская Федерация",
+    "gender" : "Мужской",
+    "personID" : {
+      "type" : "PASSPORT",
+      "numberID" : "4019 345678",
+      "issueDate" : "19.12.2019",
+      "issueOrg" : "ОТДЕЛОМ УФМС РОССИИ ПО ВЛАДИМИРСКОЙ ОБЛАСТИ В ГОРОДЕ ВЛАДИМИР"
+    },
+    "addresses" : {
+      "registrationAddress" : "Владимирская область, г. Владимир ул.Ленина 3 кв.35",
+      "residentialAddress" : "Псковская область, г. Опочка ул.Некрасова 25 кв.3"
+    },
+    "phones" : {
+      "homePhone" : "356-11-11",
+      "mobilePhone" : "+7 (495) 555-55-55"
+    },
+    "creditHistory" : {
+      "totalCreditAccounts" : 1,
+      "presentCreditAccounts" : 1,
+      "pastCreditAccounts" : 0,
+      "accounts": [
+        {
+          "type" : "Потребительский кредит",
+          "status" : "Счет открыт",
+          "accountNumber" : "КД123456789",
+          "creditor" : "Банк",
+          "paymentDates" : {
+            "openDate" : "21.03.2024",
+            "finalPaymentDate" : "22.03.2025",
+            "lastPaymentDate" : "12.11.2024",
+            "frequency" : "Ежемесячно"
+          },
+          "balance" : {
+            "account" : 200000,
+            "monthlyPayments" : 34566.38,
+            "outstanding" : 110568.83,
+            "pastDue" : 13456.99
+          },
+          "latePayments" : {
+            "30-59" : 2,
+            "60-89" : 1,
+            "90+" : 1
+          }
+        }
+      ]
+    }
+  }
+}
