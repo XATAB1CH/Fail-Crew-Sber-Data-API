@@ -28,9 +28,12 @@ func NewWeb(config utils.Config) *Web {
 		router = gin.New()
 	}
 
-	// router.GET("/", serverHandler.IndexHandler)
-	// router.GET("/auth", serverHandler.AuthHandler)
-	// router.Static("/js", "./game/js")
+	// router.GET("/sources", serverHandler.GetSourcesHandler)
+	// router.GET("/funcs", serverHandler.GetFuncsHandler)
+
+	// router.POST("/recipes", serverHandler.GetNNPredicition)
+	// router.POST("/save-recipe", serverHandler.SaveRecipe)
+	// router.POST("/save-source", serverHandler.SaveSource)
 
 	return &Web{router: router, handler: serverHandler}
 }
