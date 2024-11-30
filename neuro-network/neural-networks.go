@@ -20,7 +20,6 @@ func GetNeuroScore() {
 		log.Fatalf("Ошибка декодирования файла: %v", err)
 	}
 
-	// теперь нужно перебрать все значения map и сложить только числовые значения float32
 	var sum float64
 	for _, v1 := range f.(map[string]interface{}) {
 		for _, v2 := range v1.(map[string]interface{}) {
