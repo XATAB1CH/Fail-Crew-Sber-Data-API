@@ -28,7 +28,7 @@ func LoadConfig() Config {
 			Port:     27017,
 			Username: "admin",
 			Password: "",
-			Database: "",
+			Database: "Fail-Crew-Sber-Data-API",
 		},
 	}
 
