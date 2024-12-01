@@ -1,0 +1,17 @@
+[
+    {
+        "type": "val",
+        "name": "int",
+        "val": 3
+    },
+    {
+        "type": "val",
+        "name": "int",
+        "val": 4
+    },
+    {
+        "type": "fun",
+        "name": "substract",
+        "val": null
+    }
+]

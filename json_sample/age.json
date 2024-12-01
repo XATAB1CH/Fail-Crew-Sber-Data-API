@@ -1,0 +1,12 @@
+[
+    {
+        "type": "val",
+        "name": "int",
+        "val": 1038703999
+    },
+    {
+        "type": "fun",
+        "name": "timeFromNow",
+        "val": null
+    }
+]

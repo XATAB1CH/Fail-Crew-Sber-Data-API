@@ -1,0 +1,12 @@
+[
+    {
+        "type": "val",
+        "name": "array",
+        "val": [5, 4, 4, 2, 5]
+    },
+    {
+        "type": "fun",
+        "name": "arrayMean",
+        "val": null
+    }
+]
