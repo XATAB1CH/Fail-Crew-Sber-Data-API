@@ -1,20 +1,14 @@
 package handler
 
 import (
-	"net/http"
-
+	"github.com/XATAB1CH/Fail-Crew-Sber-Data-API/utils"
 	"github.com/gin-gonic/gin"
 )
 
 func GetSourcesHandler(c *gin.Context) {
-	var jsonData map[string]interface{}
+	var urls []string = []string{"./analytics/samples/федресурс.json", "./analytics/samples/ресурс_комитета_по_образованию.json", "./analytics/samples/объединенное_кредитное_бюро.json", "./analytics/samples/анкета_на_получение_кредита.json"}
 
-	// Привязываем JSON из тела запроса к переменной jsonData
-	if err := c.BindJSON(&jsonData); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
+	merged, _ := utils.MergeJSONFiles(urls)
 
-	// Возвращаем полученные данные обратно клиенту
-	c.JSON(http.StatusOK, jsonData)
+	c.Data(200, "application/json", merged)
 }

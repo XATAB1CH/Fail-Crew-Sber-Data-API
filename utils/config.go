@@ -9,16 +9,7 @@ import (
 
 type Config struct {
 	DebugMode bool
-	Postgres
 	Mongo
-}
-
-type Postgres struct {
-	Host     string
-	Port     int
-	Username string
-	Password string
-	Database string
 }
 
 type Mongo struct {
@@ -32,13 +23,6 @@ type Mongo struct {
 func LoadConfig() Config {
 	config := Config{
 		DebugMode: true,
-		Postgres: Postgres{
-			Host:     "127.0.0.1",
-			Port:     5432,
-			Username: "admin",
-			Password: "",
-			Database: "",
-		},
 		Mongo: Mongo{
 			Host:     "127.0.0.1",
 			Port:     27017,

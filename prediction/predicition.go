@@ -1,15 +1,14 @@
-package neural_networks
+package predicition
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"os"
 	"reflect"
 )
 
-func GetNeuroScore() {
-	jsonData, err := os.ReadFile("model.json")
+func GetNNPredicition(modelPath string) float64 {
+	jsonData, err := os.ReadFile(modelPath)
 	if err != nil {
 		log.Fatalf("Ошибка чтения файла: %v", err)
 	}
@@ -31,5 +30,8 @@ func GetNeuroScore() {
 		}
 	}
 
-	fmt.Print(sum)
+	if sum > 100.00 {
+		sum = 100.00
+	}
+	return sum
 }

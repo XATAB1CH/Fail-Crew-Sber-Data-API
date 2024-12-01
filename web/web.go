@@ -3,7 +3,6 @@ package web
 import (
 	"io"
 	"log"
-	"net/http"
 	"time"
 
 	"github.com/XATAB1CH/Fail-Crew-Sber-Data-API/utils"
@@ -14,15 +13,12 @@ import (
 )
 
 type Web struct {
-	router  *gin.Engine
-	handler *handler.Handler
+	router *gin.Engine
 }
 
 func NewWeb(config utils.Config) *Web {
 	var router *gin.Engine
 	gin.SetMode(gin.ReleaseMode)
-
-	serverHandler := handler.NewHandler(config)
 
 	if config.DebugMode {
 		router = gin.Default()
@@ -33,7 +29,7 @@ func NewWeb(config utils.Config) *Web {
 
 	// Настройка CORS
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:3000"}, // Укажите здесь разрешенные источники
+		AllowOrigins:     []string{"http://192.168.0.106:3000"}, // Укажите здесь разрешенные источники
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Accept"},
 		ExposeHeaders:    []string{"Content-Length"},
@@ -41,25 +37,14 @@ func NewWeb(config utils.Config) *Web {
 		MaxAge:           12 * time.Hour,
 	}))
 
-	router.GET("/sources", func(c *gin.Context) {
-		var jsonData map[string]interface{}
+	router.GET("/sources", handler.GetSourcesHandler)
+	router.GET("/prediction", handler.GetNNPredicitionHandler)
 
-		// Привязываем JSON из тела запроса к переменной jsonData
-		if err := c.BindJSON(&jsonData); err != nil {
-			c.JSON(http.StatusOK, gin.H{"correct": "кайф"})
-			return
-		}
+	// router.POST("/save-recipe", handler.SaveRecipeHandler)
+	// router.POST("/save-source", handler.SaveSourceHandler)
+	//router.GET("/funcs", serve=rHandler.GetFuncsHandler)
 
-		// Возвращаем полученные данные обратно клиенту
-		c.JSON(http.StatusOK, jsonData)
-	})
-	// router.GET("/funcs", serverHandler.GetFuncsHandler)
-
-	// router.POST("/recipes", serverHandler.GetNNPredicition)
-	// router.POST("/save-recipe", serverHandler.SaveRecipe)
-	// router.POST("/save-source", serverHandler.SaveSource)
-
-	return &Web{router: router, handler: serverHandler}
+	return &Web{router: router}
 }
 
 func (w *Web) Run() {

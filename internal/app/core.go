@@ -21,11 +21,6 @@ type Core struct {
 }
 
 func NewCore(config utils.Config, ctx context.Context, wg *sync.WaitGroup) (*Core, error) { // инициализация ядра
-	PostgreSQL, err := database.PostgreConnect(config) // подключение к БД PostgreSQL
-	if err != nil {
-		return nil, err
-	}
-
 	MongoDB, err := database.MongoConnect(config) // подключение к БД MongoDB
 	if err != nil {
 		return nil, err
@@ -35,7 +30,6 @@ func NewCore(config utils.Config, ctx context.Context, wg *sync.WaitGroup) (*Cor
 
 	return &Core{
 		Web:     web,
-		Postgre: PostgreSQL,
 		Mongo:   MongoDB,
 		ctx:     ctx,
 		wg:      wg,
