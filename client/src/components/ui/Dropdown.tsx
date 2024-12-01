@@ -20,7 +20,7 @@ export default function Dropdown({options, label, onSelect}: DropdownProps) {
     const filteredOptions = options.filter((option) =>
         option.label.toLowerCase().includes(searchParam.toLowerCase())
     );
-
+    
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchParam(e.target.value);
         setSelectedOption(e.target.value);
@@ -41,6 +41,7 @@ export default function Dropdown({options, label, onSelect}: DropdownProps) {
             <label htmlFor="dropdown" className="block text-sm font-medium text-gray-700">
                 {label}
             </label>
+            :"L "
             
             <input
                 id="dropdown"
