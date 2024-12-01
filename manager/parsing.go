@@ -11,7 +11,7 @@ import (
 )
 
 type IngredientJSON struct {
-	Itype string      `json:"type"`
+	Itype string      `json:"IType"`
 	Name  string      `json:"name"`
 	Value interface{} `json:"val"`
 }

@@ -8,6 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"github.com/XATAB1CH/Fail-Crew-Sber-Data-API/manager"
 )
 
 func UploadRecipeHandler(c *gin.Context) {
@@ -17,7 +18,7 @@ func UploadRecipeHandler(c *gin.Context) {
 		return
 	}
 
-	var recipe interface{}
+	var recipe []manager.IngredientJSON
 
 	if err := c.BindJSON(&recipe); err != nil {
 		fmt.Println(err)
