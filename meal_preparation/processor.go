@@ -14,6 +14,15 @@ type Processor struct {
 	IsWorking       bool
 }
 
+func (p *Processor) reverseCash() {
+	n := len(p.Cash)
+	for i := 0; i < n/2; i++ {
+		tmp := p.Cash[i]
+		p.Cash[i] = p.Cash[n-i-1]
+		p.Cash[n-i-1] = tmp
+	}
+}
+
 func (p *Processor) Load(recipy Recipy) {
 	p.Instructions = recipy
 }
@@ -22,6 +31,7 @@ func (p *Processor) Execute() Ingredient {
 	p.IsWorking = true
 	p.JobIsMade = false
 	p.Cash = p.Instructions.Ingredients
+	p.reverseCash()
 
 	for len(p.Cash) > 1 && p.ExecutionNumber < 10000 {
 		p.LastInstruction = len(p.Cash)
