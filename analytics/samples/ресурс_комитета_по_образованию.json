@@ -1,0 +1,36 @@
+{
+  "personData": {
+    "firstName": "Иван",
+    "lastName": "Иванов",
+    "middleName": "Иванович",
+    "gender" : "M",
+    "birthDate" : "19.12.2005",
+    "citizenship" : "RUSSIA",
+    "educationStatus" : "3",
+    "bachelorInfo" : {
+      "universityName" : "Псковский Государственный университет",
+      "universityAddress" : "Псковская область, г. Псков ул.Советская 21",
+      "educationSpecialty" : "Информатика и вычислительная техника",
+      "educationStartDate" : "01.09.2023",
+      "educationEndDate" : "01.09.2027"
+    },
+    "schoolInfo" : {
+      "schoolName" : "ГБОУ СОШ №1",
+      "schoolAddress" : "Псковская область, г. Псков ул.Советская 21",
+      "schoolStartDate" : "01.09.2012",
+      "schoolEndDate" : "01.09.2023",
+      "diplomaID" : "9283233923",
+      "finalExamSubjects" : ["Русский", "Математика", "Информатика"],
+      "participationOlympiad" : true,
+      "prizePlaceOlympiad" : 0,
+      "subjects" : [
+        { "subjectName" : "Информатика", "grade" : "5" },
+        { "subjectName" : "Литература", "grade" : "4" },
+        { "subjectName" : "История", "grade" : "4" },
+        { "subjectName" : "Английский", "grade" : "2" },
+        { "subjectName" : "Математика", "grade" : "5" }
+      ]
+    }
+  }
+}
+  

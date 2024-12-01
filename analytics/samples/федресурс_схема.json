@@ -1,0 +1,135 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Федресурс",
+  "type": "object",
+  "required": [
+    "result"
+  ],
+  "properties": {
+    "result": {
+      "description": "История банкротства и правонарушений по участнику сделки",
+      "type": "object",
+      "required": [
+        "fio",
+        "birthDate",
+        "birthplace",
+        "INN",
+        "SNILS",
+        "bankruptcy",
+        "offesnseHistory"
+      ],
+      "properties": {
+        "fio": {
+          "description": "ФИО участника сделки",
+          "type": "string"
+        },
+        "birthDate": {
+          "description": "Дата рождения",
+          "type": "string"
+        },
+        "birthplace": {
+          "description": "Место рождения",
+          "type": "string"
+        },
+        "INN": {
+          "description": "ИНН",
+          "type": "string"
+        },
+        "SNILS": {
+          "description": "СНИЛС",
+          "type": "string"
+        },
+        "bankruptcy": {
+          "description": "Данные о банкротстве",
+          "type": "object",
+          "required": [
+            "currentBankruptcyProcedure"
+          ],
+          "properties": {
+            "currentBankruptcyProcedure": {
+              "description": "Есть ли текущая процедура банкротства",
+              "type": "boolean"
+            },
+            "date": {
+              "description": "Дата начала процедуры банкротства",
+              "type": "string"
+            },
+            "stage": {
+              "description": "Стадия процедуры банкротства",
+              "type": "string"
+            },
+            "reason": {
+              "description": "Причина процедуры банкротства",
+              "type": "string"
+            },
+            "court": {
+              "description": "Суд, в котором рассматривается банкротство",
+              "type": "string"
+            },
+            "bankruptcyHistory": {
+              "description": "История банкротств",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "date",
+                  "reason",
+                  "court"
+                ],
+                "properties": {
+                  "date": {
+                    "description": "Дата получения статуса банкрота",
+                    "type": "string"
+                  },
+                  "reason": {
+                    "description": "Причина банкротства",
+                    "type": "string"
+                  },
+                  "court": {
+                    "description": "Суд, который принял решение о банкротстве",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "offesnseHistory": {
+          "description": "История правонарушений",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "date",
+              "court",
+              "type",
+              "offense"
+            ],
+            "properties": {
+              "date": {
+                "description": "Дата правонарушения",
+                "type": "string"
+              },
+              "court": {
+                "description": "Суд, который принял решение о правонарушении",
+                "type": "string"
+              },
+              "type": {
+                "description": "Тип правонарушения - административное/уголовное и т.д.",
+                "type": "string"
+              },
+              "offense": {
+                "description": "Описание правонарушения",
+                "type": "string"
+              },
+              "fineAmount" : {
+                "description": "Сумма штрафа",
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

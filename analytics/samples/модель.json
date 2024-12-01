@@ -1,0 +1,15 @@
+{
+  "studentData": {
+    "age": 19,
+    "residenceRegion" : "60",
+    "averageScore" : 4.5,
+    "profession" : "Инженер",
+    "administrativeOffense" : 1,
+    "overdueLoanStudent" : 56.8
+  },
+  "parentsData": {
+    "overdueLoanParents" : 23.8,
+    "parentsBankruptcy" : true
+  }
+}
+  

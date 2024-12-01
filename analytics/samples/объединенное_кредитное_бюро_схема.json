@@ -1,0 +1,253 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Данные из БКИ Объединенное кредитное бюро",
+  "type": "object",
+  "required": [
+    "loaner"
+  ],
+  "properties": {
+    "loaner": {
+      "type": "object",
+      "required": [
+        "firstName",
+        "lastName",
+        "birthplace",
+        "birthDate",
+        "citizenship",
+        "gender",
+        "personID",
+        "addresses",
+        "phones",
+        "creditHistory"
+      ],
+      "properties": {
+        "firstName": {
+          "description": "Имя",
+          "type": "string"
+        },
+        "lastName": {
+          "description": "Фамилия",
+          "type": "string"
+        },
+        "middleName": {
+          "description": "Отчество",
+          "type": "string"
+        },
+        "birthplace": {
+          "description": "Место рождения",
+          "type": "string"
+        },
+        "birthDate": {
+          "description": "Дата рождения",
+          "type": "string"
+        },
+        "citizenship": {
+          "description": "Гражданство",
+          "type": "string"
+        },
+        "gender": {
+          "description": "Пол",
+          "type": "string"
+        },
+        "personID": {
+          "description": "Документ заемщика",
+          "type": "object",
+          "required": [
+            "type",
+            "numberID",
+            "issueDate",
+            "issueOrg"
+          ],
+          "properties": {
+            "type": {
+              "description": "Ти документа",
+              "type": "string"
+            },
+            "numberID": {
+              "description": "Номер",
+              "type": "string"
+            },
+            "issueDate": {
+              "description": "Дата выдачи",
+              "type": "string"
+            },
+            "issueOrg": {
+              "description": "Кем выдан",
+              "type": "string"
+            }
+          }
+        },
+        "addresses": {
+          "description": "Адреса заемщика",
+          "type": "object",
+          "required": [
+            "registrationAddress",
+            "residentialAddress"
+          ],
+          "properties": {
+            "registrationAddress": {
+              "description": "Адрес регистрации",
+              "type": "string"
+            },
+            "residentialAddress": {
+              "description": "Адрес проживания",
+              "type": "string"
+            }
+          }
+        },
+        "phones": {
+          "description": "Телефоны заемщика",
+          "type": "object",
+          "required": [
+            "mobilePhone"
+          ],
+          "properties": {
+            "homePhone": {
+              "description": "Домашний телефон",
+              "type": "string"
+            },
+            "mobilePhone": {
+              "description": "Мобильный телефон",
+              "type": "string"
+            }
+          }
+        },
+        "creditHistory": {
+          "description": "Данные о кредитной истории",
+          "type": "object",
+          "required": [
+            "totalCreditAccounts",
+            "presentCreditAccounts",
+            "pastCreditAccounts"
+          ],
+          "properties": {
+            "totalCreditAccounts": {
+              "description": "Общее количество кредитных счетов",
+              "type": "integer"
+            },
+            "presentCreditAccounts": {
+              "description": "Количество действующих кредитных счетов",
+              "type": "integer"
+            },
+            "pastCreditAccounts": {
+              "description": "Количество закрытых кредитных счетов",
+              "type": "integer"
+            },
+            "accounts": {
+              "description": "Кредитные счета",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "type",
+                  "status",
+                  "accountNumber",
+                  "creditor",
+                  "paymentDates",
+                  "balance"
+                ],
+                "properties": {
+                  "type": {
+                    "description": "Тип счета",
+                    "type": "string"
+                  },
+                  "status": {
+                    "description": "Статус счета",
+                    "type": "string"
+                  },
+                  "accountNumber": {
+                    "description": "Номер счета",
+                    "type": "string"
+                  },
+                  "creditor": {
+                    "description": "Кредитор",
+                    "type": "string"
+                  },
+                  "paymentDates": {
+                    "description": "Даты",
+                    "type": "object",
+                    "required": [
+                      "openDate",
+                      "finalPaymentDate",
+                      "lastPaymentDate",
+                      "frequency"
+                    ],
+                    "properties": {
+                      "openDate": {
+                        "description": "Дата открытия",
+                        "type": "string"
+                      },
+                      "finalPaymentDate": {
+                        "description": "Ожидаемая дата финального платежа",
+                        "type": "string"
+                      },
+                      "lastPaymentDate": {
+                        "description": "Дата последнего платежа",
+                        "type": "string"
+                      },
+                      "frequency": {
+                        "description": "Периодичность платежей",
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "balance": {
+                    "description": "Платежи",
+                    "type": "object",
+                    "required": [
+                      "account",
+                      "monthlyPayments",
+                      "outstanding",
+                      "pastDue"
+                    ],
+                    "properties": {
+                      "account": {
+                        "description": "Сумма кредита",
+                        "type": "number"
+                      },
+                      "monthlyPayments": {
+                        "description": "Ежемесячный платеж",
+                        "type": "number"
+                      },
+                      "outstanding": {
+                        "description": "Остаток",
+                        "type": "number"
+                      },
+                      "pastDue": {
+                        "description": "Просрочка",
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "latePayments": {
+                    "description": "Просрочки",
+                    "type": "object",
+                    "required": [
+                      "30-59",
+                      "60-89",
+                      "90+"
+                    ],
+                    "properties": {
+                      "30-59": {
+                        "description": "Просрочка от 30 до 59 дней",
+                        "type": "integer"
+                      },
+                      "60-89": {
+                        "description": "Просрочка от 60 до 89 дней",
+                        "type": "integer"
+                      },
+                      "90+": {
+                        "description": "Просрочка от 90 дней и более",
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

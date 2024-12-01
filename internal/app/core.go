@@ -7,6 +7,7 @@ import (
 	"sync"
 
 	"github.com/XATAB1CH/Fail-Crew-Sber-Data-API/internal/database"
+	"github.com/XATAB1CH/Fail-Crew-Sber-Data-API/manager"
 	"github.com/XATAB1CH/Fail-Crew-Sber-Data-API/utils"
 	"github.com/XATAB1CH/Fail-Crew-Sber-Data-API/web"
 	"go.mongodb.org/mongo-driver/v2/mongo"
@@ -18,15 +19,12 @@ type Core struct {
 	Mongo   *mongo.Client
 	ctx     context.Context
 	wg      *sync.WaitGroup
+	
 }
 
-func NewCore(config utils.Config, ctx context.Context, wg *sync.WaitGroup) (*Core, error) { // инициализация ядра
-	PostgreSQL, err := database.PostgreConnect(config) // подключение к БД PostgreSQL
-	if err != nil {
-		return nil, err
-	}
 
-	MongoDB, err := database.MongoConnect(config) // подключение к БД MongoDB
+func NewCore(config utils.Config, ctx context.Context, wg *sync.WaitGroup) (*Core, error) { // инициализация ядра
+	MongoDB, err := database.MongoConnect("mongodb://localhost:27017/") // подключение к БД MongoDB
 	if err != nil {
 		return nil, err
 	}
@@ -34,15 +32,22 @@ func NewCore(config utils.Config, ctx context.Context, wg *sync.WaitGroup) (*Cor
 	web := web.NewWeb(config) // инициализация web сервера
 
 	return &Core{
-		Web:     web,
-		Postgre: PostgreSQL,
-		Mongo:   MongoDB,
-		ctx:     ctx,
-		wg:      wg,
+		Web:   web,
+		Mongo: MongoDB,
+		ctx:   ctx,
+		wg:    wg,
 	}, nil
 }
 
 func (core *Core) Run() { // запуск ядра
+	manager.Functions_table["substract"] = manager.Substract
+	manager.Functions_table["timeFromNow"] = manager.TimeFromNow
+	manager.Functions_table["arraySum"] = manager.ArraySum
+	manager.Functions_table["arrayMean"] = manager.ArrayMean
+	manager.Functions_table["arrayCount"] = manager.ArrayCount
+	manager.Functions_table["concatStrings"] = manager.ConcatStrings
+	manager.Functions_table["return"] = manager.Ret
+	manager.Man.BeginWork(4, 7)
 	go core.Web.Run()
 
 	go core.stop()

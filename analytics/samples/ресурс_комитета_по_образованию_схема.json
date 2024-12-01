@@ -1,0 +1,149 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Ресурс  комитета по образованию",
+  "type": "object",
+  "properties": {
+    "personData": {
+      "description" : "Описание данных по участнику сделки",
+      "type": "object",
+      "required": [
+        "firstName",
+        "lastName",
+        "gender",
+        "birthDate",
+        "citizenship",
+        "educationStatus"
+      ],
+      "properties": {
+        "firstName": {
+          "description" : "Имя",
+          "type": "string"
+        },
+        "lastName": {
+          "description" : "Фамилия",
+          "type": "string"
+        },
+        "middleName": {
+          "description" : "Отчество",
+          "type": "string"
+        },
+        "gender": {
+          "description" : "Пол",
+          "type": "string"
+        },
+        "birthDate": {
+          "description" : "Дата рождения",
+          "type": "string"
+        },
+        "citizenship": {
+          "description" : "Гражданство",
+          "type": "string"
+        },
+        "educationStatus": {
+          "description" : "Код ступени образования 1 - высшее, 2 - среднее, 3 - неоконченное высшее и т.д.",
+          "type": "string"
+        },
+        "universityInfo": {
+          "description" : "Данные по университету",
+          "type": "object",
+          "required": [
+            "universityName",
+            "universityAddress",
+            "educationSpecialty",
+            "educationStartDate",
+            "educationEndDate"
+          ],
+          "properties": {
+            "universityName": {
+              "description" : "Название университета",
+              "type": "string"
+            },
+            "universityAddress": {
+              "description" : "Адрес университета",
+              "type": "string"
+            },
+            "educationSpecialty": {
+              "description" : "Специальность",
+              "type": "string"
+            },
+            "educationStartDate": {
+              "description" : "Дата начала обучения",
+              "type": "string"
+            },
+            "educationEndDate": {
+              "description" : "Дата окончания обучения",
+              "type": "string"
+            }
+          }
+        },
+        "schoolInfo": {
+          "description" : "Данные по школьному образованию",
+          "type": "object",
+          "required": [
+            "schoolName",
+            "schoolAddress",
+            "schoolStartDate",
+            "schoolEndDate",
+            "diplomaID",
+            "subjects"
+          ],
+          "properties": {
+            "schoolName": {
+              "description" : "Номер школы",
+              "type": "string"
+            },
+            "schoolAddress": {
+              "description" : "Адрес школы",
+              "type": "string"
+            },
+            "schoolStartDate": {
+              "description" : "Дата начала обучения",
+              "type": "string"
+            },
+            "schoolEndDate": {
+              "description" : "Дата окончания обучения",
+              "type": "string"
+            },
+            "diplomaID": {
+              "description" : "Номер аттестата",
+              "type": "string"
+            },
+            "finalExamSubjects" : {
+              "description" : "Список предметов на ЕГЭ",
+              "type" : "array"
+            },
+            "participationOlympiad" : {
+              "description" : "Участие в Олимпиаде",
+              "type" : "boolean"
+            },
+            "prizePlaceOlympiad" : {
+              "description" : "Количество призовых мест на Олимпиадах",
+              "type" : "integer"
+            },
+            "subjects": {
+              "description" : "Предметы",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "subjectName",
+                  "grade"
+                ],
+                "properties": {
+                  "subjectName": {
+                    "description" : "Название предмета",
+                    "type": "string"
+                  },
+                  "grade": {
+                    "description" : "Оценка",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
