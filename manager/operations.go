@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+var Functions_table map[string]func([]interface{}) interface{} = make(map[string]func([]interface{}) interface{})
+
 // expected [value1, value2], substract values[0] - values[1]
 func Substract(operands []interface{}) interface{} {
 	var value1 interface{} = operands[0]

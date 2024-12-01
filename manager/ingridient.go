@@ -1,7 +1,5 @@
 package manager
 
-import "github.com/go-delve/delve/pkg/proc/core"
-
 type Ingredient interface {
 	TypeOf() string
 	Call([]interface{}) interface{}
@@ -16,7 +14,7 @@ func (f *Function) TypeOf() string {
 }
 
 func (f *Function) Call(values []interface{}) interface{} {
-	ref_fun := core.Functions_table[f.Name]
+	ref_fun := Functions_table[f.Name]
 	var res interface{} = ref_fun(values)
 	return res
 }
