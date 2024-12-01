@@ -2,7 +2,7 @@ package handler
 
 import (
 	"context"
-	"encoding/json"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
@@ -11,28 +11,27 @@ import (
 )
 
 func UploadRecipeHandler(c *gin.Context) {
-	collection, err := connectToMongoDB("recipes")
+	collection, err := connectToMongoDB("sources")
 	if err != nil {
 		c.JSON(500, gin.H{"error": "Failed to connect to the database"})
 		return
 	}
 
-	file, err := c.FormFile("file")
-	if err != nil {
-		c.JSON(400, gin.H{"error": "File not found"})
-		return
+	var recipe interface{}
+
+	if err := c.BindJSON(&recipe); err != nil {
+		fmt.Println(err)
 	}
 
-	data, err := json.Marshal(file)
-	if err != nil {
-		c.JSON(400, gin.H{"error": "Failed to convert file to JSON"})
-		return
-	}
+	// data, err := json.Marshal(file)
+	// if err != nil {
+	// 	c.JSON(400, gin.H{"error": "Failed to convert file to JSON"})
+	// 	return
+	// }
 
 	// Создаем документ для вставки
 	document := bson.M{
-		"filename": file.Filename,
-		"data":     data,
+		"data": recipe,
 	}
 
 	// Вставляем документ в коллекцию
@@ -42,7 +41,7 @@ func UploadRecipeHandler(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, gin.H{"status": "File uploaded successfully", "fileData": data})
+	c.JSON(200, gin.H{"status": "File uploaded successfully", "fileData": recipe})
 }
 
 func connectToMongoDB(collection string) (*mongo.Collection, error) {
