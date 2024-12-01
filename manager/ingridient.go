@@ -1,4 +1,4 @@
-package meal_preparation
+package manager
 
 var Functions_table map[string]func([]interface{}) interface{} = make(map[string]func([]interface{}) interface{})
 

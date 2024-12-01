@@ -7,6 +7,7 @@ import (
 	"sync"
 
 	"github.com/XATAB1CH/Fail-Crew-Sber-Data-API/internal/database"
+	"github.com/XATAB1CH/Fail-Crew-Sber-Data-API/manager"
 	"github.com/XATAB1CH/Fail-Crew-Sber-Data-API/utils"
 	"github.com/XATAB1CH/Fail-Crew-Sber-Data-API/web"
 	"go.mongodb.org/mongo-driver/v2/mongo"
@@ -18,6 +19,7 @@ type Core struct {
 	Mongo   *mongo.Client
 	ctx     context.Context
 	wg      *sync.WaitGroup
+	mangr   manager.Manager
 }
 
 func NewCore(config utils.Config, ctx context.Context, wg *sync.WaitGroup) (*Core, error) { // инициализация ядра
@@ -37,6 +39,7 @@ func NewCore(config utils.Config, ctx context.Context, wg *sync.WaitGroup) (*Cor
 }
 
 func (core *Core) Run() { // запуск ядра
+	core.mangr.BeginWork(10, 10)
 	go core.Web.Run()
 
 	go core.stop()

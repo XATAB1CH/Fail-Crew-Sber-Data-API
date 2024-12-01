@@ -1,4 +1,4 @@
-package meal_preparation
+package manager
 
 import (
 	"encoding/json"
