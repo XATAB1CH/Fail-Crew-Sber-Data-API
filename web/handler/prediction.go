@@ -6,7 +6,6 @@ import (
 )
 
 func GetNNPredicitionHandler(c *gin.Context) {
-	
 	modelPath := "analytics/samples/модель.json"
 
 	pred := predicition.GetNNPredicition(modelPath)

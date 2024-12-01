@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"time"
 
 	"github.com/XATAB1CH/Fail-Crew-Sber-Data-API/manager"
 	"github.com/gin-gonic/gin"
@@ -42,7 +43,21 @@ func UploadRecipeHandler(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, gin.H{"status": "File uploaded successfully", "fileData": recipe})
+	var result []manager.Ingredient
+
+	for i := 0; i < 5; i++ {
+		res := manager.Man.GetResult()
+		time.Sleep(1 * time.Second)
+		if len(res) > 0 {
+			for _, report := range res {
+				for _, ing := range report.Data {
+					result = append(result, ing)
+				}
+			}
+		}
+	}
+	c.JSON(200, gin.H{"status": "File uploaded successfully", "reciepteResult": result})
+	c.JSON(200, gin.H{"status": "File uploaded successfully", "reciepte": recipe})
 }
 
 func connectToMongoDB(collection string) (*mongo.Collection, error) {
