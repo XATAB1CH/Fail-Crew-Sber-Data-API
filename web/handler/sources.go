@@ -1,14 +1,40 @@
 package handler
 
 import (
-	"github.com/XATAB1CH/Fail-Crew-Sber-Data-API/utils"
+	"encoding/json"
+	"io/ioutil"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 )
 
-func GetSourcesHandler(c *gin.Context) {
-	var urls []string = []string{"./analytics/samples/федресурс.json", "./analytics/samples/ресурс_комитета_по_образованию.json", "./analytics/samples/объединенное_кредитное_бюро.json", "./analytics/samples/анкета_на_получение_кредита.json"}
+type JSONFile struct {
+	ID      string `json:"id"`
+	Content json.RawMessage `json:"content"`
+}
 
-	merged, _ := utils.MergeJSONFiles(urls)
+func GetSourcesHandler(c *gin.Context, ) {
+	urls := []string{
+		"./analytics/samples/федресурс.json",
+		"./analytics/samples/ресурс_комитета_по_образованию.json",
+		"./analytics/samples/объединенное_кредитное_бюро.json",
+		"./analytics/samples/анкета_на_получение_кредита.json",
+	}
 
-	c.Data(200, "application/json", merged)
+	var jsonFiles []JSONFile
+
+	for id, url := range urls {
+		content, err := ioutil.ReadFile(url)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		jsonFiles = append(jsonFiles, JSONFile{
+			ID:      string(id),
+			Content: content,
+		})
+	}
+
+	c.JSON(http.StatusOK, jsonFiles)
 }
