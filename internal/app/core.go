@@ -19,9 +19,8 @@ type Core struct {
 	Mongo   *mongo.Client
 	ctx     context.Context
 	wg      *sync.WaitGroup
-	mangr   manager.Manager
+	
 }
-
 
 
 func NewCore(config utils.Config, ctx context.Context, wg *sync.WaitGroup) (*Core, error) { // инициализация ядра
@@ -48,7 +47,7 @@ func (core *Core) Run() { // запуск ядра
 	manager.Functions_table["arrayCount"] = manager.ArrayCount
 	manager.Functions_table["concatStrings"] = manager.ConcatStrings
 	manager.Functions_table["return"] = manager.Ret
-	core.mangr.BeginWork(10, 10)
+	manager.Man.BeginWork(4, 7)
 	go core.Web.Run()
 
 	go core.stop()

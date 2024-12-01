@@ -18,7 +18,7 @@ type IngredientJSON struct {
 
 // type IngredientJSON map[string]interface{}
 
-func readJsonFromPath(path string) ([]byte, error) {
+func ReadJsonFromPath(path string) ([]byte, error) {
 	jsonFile, err := os.Open(path)
 	if err != nil {
 		return make([]byte, 0), err
@@ -34,7 +34,7 @@ func readJsonFromPath(path string) ([]byte, error) {
 	return bytes, nil
 }
 
-func readRecipyFromJson(jsonBytes []byte) []IngredientJSON {
+func ReadRecipyFromJson(jsonBytes []byte) []IngredientJSON {
 	var recipe []IngredientJSON
 
 	err := json.Unmarshal(jsonBytes, &recipe)
@@ -44,7 +44,7 @@ func readRecipyFromJson(jsonBytes []byte) []IngredientJSON {
 	return recipe
 }
 
-func jsonDataToRecipy(data []IngredientJSON) (recipy []Ingredient) {
+func JsonDataToRecipy(data []IngredientJSON) (recipy []Ingredient) {
 	for _, ingredient := range data {
 		recipy = append(recipy, JsonModToIngredient(&ingredient))
 	}

@@ -2,6 +2,8 @@ package manager
 
 import "sync"
 
+var Man Manager
+
 type Task struct {
 	processor *Processor
 	queue     chan *Recipy

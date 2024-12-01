@@ -2,13 +2,14 @@ package handler
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
+	"github.com/XATAB1CH/Fail-Crew-Sber-Data-API/manager"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"github.com/XATAB1CH/Fail-Crew-Sber-Data-API/manager"
 )
 
 func UploadRecipeHandler(c *gin.Context) {
@@ -24,11 +25,10 @@ func UploadRecipeHandler(c *gin.Context) {
 		fmt.Println(err)
 	}
 
-	// data, err := json.Marshal(file)
-	// if err != nil {
-	// 	c.JSON(400, gin.H{"error": "Failed to convert file to JSON"})
-	// 	return
-	// }
+	bytes, _ := json.Marshal(recipe)
+	rec := manager.ReadRecipyFromJson(bytes)
+	r := manager.JsonDataToRecipy(rec)
+	manager.Man.GiveRecipy(&manager.Recipy{1, r})
 
 	// Создаем документ для вставки
 	document := bson.M{
