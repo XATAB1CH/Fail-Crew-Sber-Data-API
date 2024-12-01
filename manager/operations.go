@@ -50,3 +50,7 @@ func ConcatStrings(operands []interface{}) interface{} {
 	}
 	return res
 }
+
+func Ret(operands []interface{}) interface{} {
+	return 0
+}

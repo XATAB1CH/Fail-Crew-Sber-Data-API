@@ -1,6 +1,6 @@
 package manager
 
-var Functions_table map[string]func([]interface{}) interface{} = make(map[string]func([]interface{}) interface{})
+import "github.com/go-delve/delve/pkg/proc/core"
 
 type Ingredient interface {
 	TypeOf() string
@@ -12,11 +12,11 @@ type Function struct {
 }
 
 func (f *Function) TypeOf() string {
-	return "func"
+	return "fun"
 }
 
 func (f *Function) Call(values []interface{}) interface{} {
-	ref_fun := Functions_table[f.Name]
+	ref_fun := core.Functions_table[f.Name]
 	var res interface{} = ref_fun(values)
 	return res
 }

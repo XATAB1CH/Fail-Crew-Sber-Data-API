@@ -8,6 +8,7 @@ type Recipy struct {
 type Processor struct {
 	Instructions    Recipy
 	Cash            []Ingredient
+	Out             []Ingredient
 	LastInstruction int
 	ExecutionNumber int
 	JobIsMade       bool
@@ -27,13 +28,14 @@ func (p *Processor) Load(recipy Recipy) {
 	p.Instructions = recipy
 }
 
-func (p *Processor) Execute() Ingredient {
+func (p *Processor) Execute() []Ingredient {
 	p.IsWorking = true
 	p.JobIsMade = false
 	p.Cash = p.Instructions.Ingredients
+
 	p.reverseCash()
 
-	for len(p.Cash) > 1 && p.ExecutionNumber < 10000 {
+	for len(p.Cash) > 0 && p.ExecutionNumber < 10000 {
 		p.LastInstruction = len(p.Cash)
 		p.ExecuteStage()
 		p.ExecutionNumber += 1
@@ -41,22 +43,27 @@ func (p *Processor) Execute() Ingredient {
 
 	p.IsWorking = false
 	p.JobIsMade = true
-	return p.Cash[0]
+	return p.Out
 }
 
 func (p *Processor) ExecuteStage() {
 
 	for index := len(p.Cash) - 1; index > -1; index-- {
 		p.LastInstruction = index
-		if p.Cash[index].TypeOf() == "val" {
+		ing_type := p.Cash[index].TypeOf()
+		if ing_type == "val" {
 			continue
 		} else {
 			break
 		}
 	}
-	var res Ingredient = p.Calculate()
-	p.Cash = append(p.Cash[:p.LastInstruction], res)
-
+	if p.Cash[p.LastInstruction].(*Function).Name == "return" {
+		p.Out = append(p.Out, p.Cash[p.LastInstruction+1:]...)
+		p.Cash = p.Cash[:p.LastInstruction]
+	} else {
+		var res Ingredient = p.Calculate()
+		p.Cash = append(p.Cash[:p.LastInstruction], res)
+	}
 }
 
 func (p *Processor) Calculate() Ingredient {
