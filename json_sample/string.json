@@ -1,0 +1,12 @@
+[
+    {
+        "type": "val",
+        "name": "arrayStr",
+        "val": ["Hello, ", " ", "world!"]
+    },
+    {
+        "type": "fun",
+        "name": "concatStrings",
+        "val": null
+    }
+]
