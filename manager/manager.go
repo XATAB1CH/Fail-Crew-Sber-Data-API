@@ -1,23 +1,28 @@
 package manager
 
+import "sync"
+
 type Task struct {
 	processor *Processor
 	queue     chan *Recipy
 }
 
 type Report struct {
-	Data          Ingredient
+	Data          []Ingredient
 	RecipyTemlate Recipy
 }
 
 type Manager struct {
 	Tasks   []Task
 	results []Report
+	mutex   sync.Mutex
 }
 
 func (m *Manager) GetResult() (res []Report) {
+	m.mutex.Lock()
 	res = m.results
 	m.results = []Report{}
+	m.mutex.Unlock()
 	return res
 }
 
@@ -57,8 +62,10 @@ func (m *Manager) StartProcessor(task *Task) {
 			break
 		}
 		task.processor.Load(*recipy)
-		var res Ingredient = task.processor.Execute()
+		var res []Ingredient = task.processor.Execute()
+		m.mutex.Lock()
 		m.results = append(m.results, Report{res, *recipy})
+		m.mutex.Unlock()
 	}
 }
 
