@@ -1,81 +1,44 @@
-import React, {useState} from 'react'
-import { Source } from '../../types/Sourse';
-import { useParams } from 'react-router-dom';
-import JsonView from '@uiw/react-json-view';
+import React, { useEffect, useState, useRef } from "react";
+import { Source } from "../../types/Sourse";
+import { useParams } from "react-router-dom";
+import Template from "../../components/common/Template";
+import { temp } from "../../store/temp";
+import { adapter } from "../../store/adapter";
+import { scheme } from "../../store/scheme";
 
-type Props = {}
+interface Ingredient {
+  IType: string;
+  name: string;
+  val: string;
+}
 
-export default function TemplateDetails({}: Props) {
-    const { templateId } = useParams<string>();
-    const sources: Source[] = [{"id": 21312,
-        "name": "hui",
-        "data": {
-            "result": {
-                "INN": "732600000098",
-                "SNILS": "10000003966",
-                "bankruptcy": {
-                    "bankruptcyHistory": [
-                        {
-                            "court": "Суд г. Владимира",
-                            "date": "19.12.2018",
-                            "reason": "Изменение состава семьи"
-                        }
-                    ],
-                },
-            }
-        }}, {
-        "id": 36820,
-        "name": "dsad",
-        "data": {
-            "result": {
-                "INN": "732600000098",
-                "SNILS": "10000003966",
-                "bankruptcy": {
-                    "bankruptcyHistory": [
-                        {
-                            "court": "Суд г. Владимира",
-                            "date": "19.12.2018",
-                            "reason": "Изменение состава семьи"
-                        }
-                    ],
-                    "court": "Суд г. Владимира",
-                    "currentBankruptcyProcedure": true,
-                    "date": "19.12.2023",
-                    "reason": "Утрата стабильного дохода",
-                    "stage": "Решение суда"
-                },
-                "birthDate": "19.12.2005",
-                "birthplace": "г. Владимир",
-                "fio": "Иванов Иван Иванович",
-                "offesnseHistory": [
-                    {
-                        "court": "Суд г. Владимира",
-                        "date": "19.12.2018",
-                        "fineAmount": 50000,
-                        "offense": "Продажа товаров и продукции без маркировки и (или) нанесения информации",
-                        "type": "Административное"
-                    }
-                ]
-            }
-        }
-    }];
+interface Recepit {
+  ingredient: Ingredient[];
+}
 
-    const [result, setResult] = useState<string>("");
-    return (
-        <div className="flex flex-col gap mt-4">
-            <div className="flex items-center justify-between">
-                <div className="font-bold text-2xl">{templateId}</div>
-            </div>
-            <div className="rounded-lg shadow-md p-4 mt-4 bg-white flex flex-col">
-                {sources && sources.map((source) => (
-                    <>
-                        <div className="font-bold text-2xl">Источник {source.id}</div>
-                        <JsonView value={source.data} />
-                    </>
-                   
-                ))}
+export default function TemplateDetails() {
+  const { templateId } = useParams<string>();
 
-            </div>
-        </div>
-    )
+  const template = temp.find((t) => t.id == Number(templateId));
+
+  // const findAdapterById = (id: number): Source => {
+  //   return adapter.find((ad) => ad.id == id);
+  // };
+
+  return (
+    <div className="flex flex-col gap mt-4">
+      <div className="flex items-center justify-between">
+        <div className="font-bold text-2xl">{templateId}</div>
+      </div>
+      {/* {
+        (template && (
+          <Template schemaJson={template["sett"]["scheme"]} source={findAdapterById(template["sett"]["source"])} />
+          // <Template schemaJson={schema1} source={source1} />
+        ))
+      } */}
+      
+      <Template schemaJson={scheme[0]} source={adapter[1]} />
+      <Template schemaJson={scheme[1]} source={adapter[2]} />
+    </div>
+  );
 }

@@ -5,36 +5,38 @@ import { Source } from "../../types/Sourse";
 import useModal from "../../hooks/useModal";
 import Modal from "../ui/Modal";
 import JsonView from "@uiw/react-json-view";
+import { getContracts } from "../../services/contractService";
 
 type Props = {};
 
-export default function SourceTable({}: Props) {
-  const [sources, setSources] = useState<Source[]>();
-  const [selectedSource, setSelectedSource] = useState<Source>();
+export default function ContractTable({}: Props) {
+  const [contracts, setContracts] = useState<any[]>();
+  const [selectedContract, setSelectedContract] = useState<any>();
+  const [parseSelectedContract, setParseSelectedContract] = useState<any>();
 
   const {
-    isOpen: isOpenSourceModal,
-    toggleModal: toggleSourceModal,
-    closeModal: closeSourceModal,
+    isOpen: isOpenContractModal,
+    toggleModal: toggleContractModal,
+    closeModal: closeContractModal,
   } = useModal();
 
   const handleOpenModal = (source: Source) => {
-    setSelectedSource(source);
-    toggleSourceModal();
+    setSelectedContract(source);
+    toggleContractModal();
   };
 
   useEffect(() => {
-    const fetchSources = async () => {
+    const fetchContracts = async () => {
       try {
-        const data = await getSources();
+        const data = await getContracts();
         console.log(data);
-        setSources(data);
+        setContracts(data);
       } catch (err) {
         console.error(err);
       }
     };
 
-    fetchSources();
+    fetchContracts();
   }, []);
 
   return (
@@ -44,7 +46,7 @@ export default function SourceTable({}: Props) {
           <thead className="text-xs text-gray-700 uppercase bg-white border-b">
             <tr>
               <th scope="col" className="px-6 py-3">
-                Id
+                title
               </th>
               <th scope="col" className="px-6 py-3">
                 Данные
@@ -52,15 +54,18 @@ export default function SourceTable({}: Props) {
             </tr>
           </thead>
           <tbody>
-            {sources &&
-              sources.map((source: Source) => (
-                <tr key={source.id} className="bg-white text-gray-400 border-b">
+            {contracts &&
+              contracts.map((contract) => (
+                <tr
+                  key={contract.id}
+                  className="bg-white text-gray-600 border-b"
+                >
                   <td scope="row" className="px-6 py-4">
-                    {source.id}
+                    {contract.title}
                   </td>
                   <td
                     className="px-6 py-4 cursor-pointer"
-                    onClick={() => handleOpenModal(source)}
+                    onClick={() => handleOpenModal(contract)}
                   >
                     Открыть
                   </td>
@@ -71,12 +76,16 @@ export default function SourceTable({}: Props) {
       </div>
       <Modal
         title="Данные"
-        isOpen={isOpenSourceModal}
-        onClose={closeSourceModal}
+        isOpen={isOpenContractModal}
+        onClose={closeContractModal}
       >
-        {selectedSource && isOpenSourceModal && (
-          <JsonView value={selectedSource.data} />
+        {selectedContract && isOpenContractModal && (
+          <JsonView value={selectedContract} />
         )}
+        <div className="mt-4 border-b">
+            
+
+        </div>
       </Modal>
     </div>
   );

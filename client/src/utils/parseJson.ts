@@ -1,5 +1,5 @@
 
-const parseJson = (schema: any) => {
+const parseJson = (schema: any): any[] => {
     
     if(!schema) {
         return [];

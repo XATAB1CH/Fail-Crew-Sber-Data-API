@@ -1,9 +1,5 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
-
-export default function MainPage({}: Props) {
-  return (
-    <div>MainPage</div>
-  )
+export default function MainPage() {
+  return <div>MainPage</div>;
 }

@@ -10,7 +10,16 @@ module.exports = {
         primary: "#527AF2",
         textColor: "#FFF",
         secondary: "#F0F3F6"
-      }
+      },
+      animation: {
+        fade: "fadeOut 3s ease-in-out",
+      },
+      keyframes: {
+        fadeOut: {
+          "0%": { opacity: 1 },
+          "100%": { opacity: 0 },
+        },
+      },
     },
   },
   plugins: [],
