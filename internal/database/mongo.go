@@ -10,19 +10,22 @@ import (
 	"go.mongodb.org/mongo-driver/v2/mongo/options"
 )
 
-func MongoConnect(config utils.Config) (*mongo.Client, error) {
-	db, err := mongo.Connect(options.Client().ApplyURI(mongoGetDNS(config)))
+func MongoConnect(dsn string) (*mongo.Client, error) {
+	db, err := mongo.Connect(options.Client().ApplyURI(dsn))
 	// todo: создание таблицы
 	return db, err
 }
 
-func mongoGetDNS(config utils.Config) string {
+func GetDNS(config utils.Config) string {
 	return fmt.Sprintf("mongodb://%s:%d", config.Mongo.Host, config.Mongo.Port)
 }
 
-func InsertDocument(ctx context.Context, collection *mongo.Collection, document interface{}) error {
+func InsertSource(client *mongo.Client, ctx context.Context, document interface{}) error {
+	// Создание коллекции
+	collection := client.Database("Fail-Crew-Sber-Data-API").Collection("sources")
+
 	// Вставка документа в коллекцию
-	_, err := collection.InsertOne(ctx, document)
+	_, err := collection.InsertOne(context.TODO(), document)
 	if err != nil {
 		return err
 	}

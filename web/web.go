@@ -40,8 +40,9 @@ func NewWeb(config utils.Config) *Web {
 	router.GET("/sources", handler.GetSourcesHandler)
 	router.GET("/prediction", handler.GetNNPredicitionHandler)
 
-	// router.POST("/save-recipe", handler.SaveRecipeHandler)
-	// router.POST("/save-source", handler.SaveSourceHandler)
+	router.POST("/sources", handler.UploadSourceHandler)
+	router.POST("/recipes", handler.UploadRecipeHandler)
+
 	//router.GET("/funcs", serve=rHandler.GetFuncsHandler)
 
 	return &Web{router: router}

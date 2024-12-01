@@ -21,7 +21,7 @@ type Core struct {
 }
 
 func NewCore(config utils.Config, ctx context.Context, wg *sync.WaitGroup) (*Core, error) { // инициализация ядра
-	MongoDB, err := database.MongoConnect(config) // подключение к БД MongoDB
+	MongoDB, err := database.MongoConnect("mongodb://localhost:27017/") // подключение к БД MongoDB
 	if err != nil {
 		return nil, err
 	}
@@ -29,10 +29,10 @@ func NewCore(config utils.Config, ctx context.Context, wg *sync.WaitGroup) (*Cor
 	web := web.NewWeb(config) // инициализация web сервера
 
 	return &Core{
-		Web:     web,
-		Mongo:   MongoDB,
-		ctx:     ctx,
-		wg:      wg,
+		Web:   web,
+		Mongo: MongoDB,
+		ctx:   ctx,
+		wg:    wg,
 	}, nil
 }
 
