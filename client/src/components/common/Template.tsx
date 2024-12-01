@@ -7,6 +7,8 @@ import Button from "../ui/Button";
 import parseJson from "../../utils/parseJson";
 import Dropdown from "../ui/Dropdown";
 import Input from "../ui/Input";
+import axios from "axios";
+import Toast from "../ui/Toast";
 
 interface Ingredient {
   IType: string;
@@ -24,6 +26,7 @@ type TemplateProps = {
 };
 
 export default function Template({ schemaJson, source }: TemplateProps) {
+  const [toast, setToast] = useState({ isVisible: false, message: "", type: "" });
   const [activeTab, setActiveTab] = useState<string>("source");
   const [result, setResult] = useState<string>("");
   const [recepit, setRecepit] = useState<Recepit>();
@@ -54,11 +57,15 @@ export default function Template({ schemaJson, source }: TemplateProps) {
       val: selectedType == "fun" ? "" : selectedValue,
     };
 
-    setIngrs((prevIngr) => [...prevIngr, newIngredient]);    
+    setIngrs((prevIngr) => [...prevIngr, newIngredient]);
 
     setRecepit((prevRecepit) => ({
       ...prevRecepit,
-      ingredient: [...(prevRecepit?.ingredient || []), newIngredient, {IType: "fun", name: "return", val: ""}],
+      ingredient: [
+        ...(prevRecepit?.ingredient || []),
+        newIngredient,
+        { IType: "fun", name: "return", val: "" },
+      ],
     }));
   };
 
@@ -80,9 +87,14 @@ export default function Template({ schemaJson, source }: TemplateProps) {
     getValues();
   }, []);
 
-  const save = () => {
+  const handleSubmit = async () => {
     console.log(recepit);
-  }
+    try {
+      const response = await axios.post("http://192.168.0.105:443/recipes", JSON.stringify(recepit));
+    } catch(error) {
+      setToast({isVisible: true, message: "Error send data", type: "error"})
+    }
+  };
 
   const handleSelect2 = (value: string) => {
     setSelectedType(value);
@@ -194,13 +206,19 @@ export default function Template({ schemaJson, source }: TemplateProps) {
             <div className="mt-4 justify-center flex">
               <Button title="Добавить" type={1} onClick={addNew} />
             </div>
-            
           </>
         )}
       </div>
       <div className="mt-4">
-        <Button title="Сохранить" onClick={() => save()} />
+        <Button title="Сохранить" onClick={() => handleSubmit()} />
       </div>
+      {toast.isVisible && (
+        <Toast
+          message={toast.message}
+          type={toast.type as "success" | "error" | "info"}
+          onClose={() => setToast({ isVisible: false, message: "", type: "" })}
+        />
+      )}
     </div>
   );
 }

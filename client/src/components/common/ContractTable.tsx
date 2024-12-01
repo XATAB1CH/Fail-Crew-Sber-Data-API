@@ -6,6 +6,7 @@ import useModal from "../../hooks/useModal";
 import Modal from "../ui/Modal";
 import JsonView from "@uiw/react-json-view";
 import { getContracts } from "../../services/contractService";
+import parseJson from "../../utils/parseJson";
 
 type Props = {};
 
@@ -20,8 +21,9 @@ export default function ContractTable({}: Props) {
     closeModal: closeContractModal,
   } = useModal();
 
-  const handleOpenModal = (source: Source) => {
-    setSelectedContract(source);
+  const handleOpenModal = (schema: any) => {
+    setParseSelectedContract(parseJson(schema));
+    setSelectedContract(schema);
     toggleContractModal();
   };
 
@@ -29,7 +31,6 @@ export default function ContractTable({}: Props) {
     const fetchContracts = async () => {
       try {
         const data = await getContracts();
-        console.log(data);
         setContracts(data);
       } catch (err) {
         console.error(err);
@@ -82,9 +83,21 @@ export default function ContractTable({}: Props) {
         {selectedContract && isOpenContractModal && (
           <JsonView value={selectedContract} />
         )}
-        <div className="mt-4 border-b">
-            
-
+        <div className="mt-4 border-t flex flex-col gap-2">
+          <div className="font-base">Поля</div>
+          {
+            parseSelectedContract &&
+            parseSelectedContract.map((psc: any) => (
+              <div className="font-base">
+                <div>Секция: {psc.section}</div>
+                {psc.fields.map((psField: any, fieldIndex: number) => (
+                  <div key={fieldIndex} className="font-base">
+                    Поле: {psField.fieldName}; Описание: {psField.description}; Тип: {psField.type}
+                  </div>
+                ))}
+              </div>
+            ))
+          }
         </div>
       </Modal>
     </div>
